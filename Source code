@@ -1,0 +1,204 @@
+#MY_METHOD {31 lines}
+a = open(r"C:\Users\DELL\Python\p1.txt")
+l =[]
+for j in a:
+    for i in j:
+        l.append(i)
+l.remove(l[len(l)-1])
+print(l)
+l2 =[]
+for i in range(len(l)):
+    l2.append(" ")
+print(l2)
+count = 13
+while count>0:
+    a = input()
+    if len(a)==1:
+        count = count - 1
+        for i in range(len(l)):
+            if l[i]==a:
+                l2[i]=l[i]
+        print(l2)
+        print(count, "chances left")
+        if(l == l2):
+            break
+    else:
+        print("Single chars only")
+        continue
+if(l == l2):
+    print("Congo!!! You did it in ",13-count, "chances" )
+else:
+    print("You exceeded the number of tries. Dont give up. Try again")
+print("............................................................................................................................................................")
+#MY_METHOD_2 ---> with CODE2  {38 lines}
+word = ["hello", "Shanmukha", "Dhanush","Always", "Keep", "smiling"]
+import random
+a = random.choice(word).lower()
+guesses= ""
+print("The length of the word is", len(a))
+for i in a:
+    print("_")
+chance = len(a) + int(len(a)*6/10)
+print("You have total of", chance, "chances to go wrong")
+fail = len(a)
+
+while chance>0:
+    guess = input("Guess...")
+    if guess in a: #for printing right/wrong
+        print("Right")
+    else:
+        print("Wrong")
+    if guess=="quit": #to quit in between
+        break
+    else:
+        if len(guess)==1: #to ensure only single letter input
+            if guess in guesses:
+                print("Already tried")
+                continue
+            else:
+                F = fail
+                fail = 0
+                guesses = guesses + guess
+                for i in a:
+                    if i in guesses:
+                        print(i)
+                    else:
+                        print("_")
+                        fail = fail + 1
+                if fail == 0:
+                    print("You win")
+                    break
+                if fail==F:
+                    chance = chance - 1
+                    print(chance,"chances left")
+        else:
+            print("Enter single characters only")
+print("............................................................................................................................................................")
+#MY_METHOD_WITH_ACTUAL_CODE
+def guess_game_min_len():
+    while True:
+        min_len = input("Enter a word in range 4-14\n")
+        try:
+            min_len = int(min_len)
+            if 4<=min_len<=14:
+                return min_len
+            else:
+                print("The length of character of the words must lie in the range of 4 and 14\n{0} does not lie in the range".format(min_len))
+                continue
+        except:
+            print(min_len, "is not a integer")
+            continue
+def guess_game_word(min_len):
+    import random
+    f = open(r"C:\Users\DELL\Python\p1.txt")
+    words_processed = 0
+    for word in f:
+        word = word.strip().lower()
+        if len(word.split())>1:
+            continue
+        if word.startswith("("):
+            continue
+        if len(word)<min_len:
+            continue
+        else:
+            words_processed = words_processed + 1
+        if random.randint(1,words_processed)==1:
+            curr_word = word
+    try:
+        return curr_word
+    except:
+        print("No words exists")
+def guess_game_attempts():
+    while True:
+        attempts_available = input("No of attempts [1-25]\n")
+        try:
+            attempts_available = int(attempts_available)
+            if 1<=attempts_available<=25:
+                return attempts_available
+            else:
+                print("attempts should lie in range of 1 and 25 only. \n{0} attempt/s is/are not accepted".format(attempts_available))
+        except:
+            print("{0} is not a integer. \nProvide integers only.".format(attempts_available))
+            continue
+length = guess_game_min_len()
+attempt = guess_game_attempts()
+word = guess_game_word(length)
+a = word
+l =[]
+for j in a:
+    for i in j:
+        l.append(i)
+print(l)
+l2 =[]
+for i in range(len(l)):
+    l2.append(" ")
+print(l2)
+count = attempt
+while count>0:
+    a = input()
+    if len(a)==1:
+        count = count - 1
+        for i in range(len(l)):
+            if l[i]==a:
+                l2[i]=l[i]
+                #count = count + 1
+                #in case we dont want user t lose attempts in case of right guesses too.
+        print(l2)
+        print(count, "chances left")
+        if(l == l2):
+            break
+    else:
+        print("Single chars only")
+        continue
+if(l == l2):
+    print("Congo!!! You did it in ",13-count, "chances" )
+else:
+    print("You exceeded the number of tries. Dont give up. Try again")
+print("............................................................................................................................................................")
+#ACTUAL_CODE
+def guess_game_word(min_len):
+    import random
+    f = open(r"C:\Users\DELL\Python\p1.txt")
+    words_processed = 0
+    for word in f:
+        word = word.strip().lower()
+        if len(word.split())>1:
+            continue
+        if word.startswith("("):
+            continue
+        if len(word)<min_len:
+            continue
+        else:
+            words_processed = words_processed + 1
+        if random.randint(1,words_processed)==1:
+            curr_word = word
+    try:
+        return curr_word
+    except:
+        print("No words exists")
+a = guess_game(5)
+def guess_game_attempts():
+    while True:
+        attempts_available = input("No of attempts [1-25]\n")
+        try:
+            attempts_available = int(attempts_available)
+            if 1<=attempts_available<=25:
+                return attempts_available
+            else:
+                print("attempts should lie in range of 1 and 25 only. \n{0} attempt/s is/are not accepted".format(attempts_available))
+        except:
+            print("{0} is not a integer. \nProvide integers only.".format(attempts_available))
+            continue
+def guess_game_min_len():
+    while True:
+        min_len = input("Enter a word in range 4-14\n")
+        try:
+            min_len = int(min_len)
+            if 4<=min_len<=14:
+                return min_len
+            else:
+                print("The length of character of the words must lie in the range of 4 and 14\n{0} does not lie in the range".format(min_len))
+                continue
+        except:
+            print(min_len, "is not a integer")
+            continue
